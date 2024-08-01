@@ -1,4 +1,4 @@
-import { HttpError, isHttpError } from 'http-errors';
+import { isHttpError } from 'http-errors';
 
 export function errorHandler(err, _req, res, _next) {
   if (isHttpError) {
@@ -6,6 +6,7 @@ export function errorHandler(err, _req, res, _next) {
       .status(err.status)
       .send({ status: err.status, message: err.message });
   }
-  console.error(err);
-  res.status(500).send({ message: 'internal serwer error' });
+  res
+    .status(500)
+    .send({ status: 500, message: 'Something went wrong', data: err.message });
 }
