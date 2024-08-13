@@ -20,14 +20,11 @@ export const contactSchema = Joi.object({
   isFavourite: Joi.boolean().messages({
     'boolean.base': 'isFavourite should be a boolean',
   }),
-  contactType: Joi.string()
-    .valid('work', 'home', 'personal')
-    .required()
-    .messages({
-      'string.base': 'Contact type should be a string',
-      'any.only': 'Contact type must be one of [work, home, personal]',
-      'any.required': 'Contact type is required',
-    }),
+  contactType: Joi.string().valid('work', 'home', 'personal').messages({
+    'string.base': 'Contact type should be a string',
+    'any.only': 'Contact type must be one of [work, home, personal]',
+    'any.required': 'Contact type is required',
+  }),
 });
 
 export const updatecontactSchema = Joi.object({
