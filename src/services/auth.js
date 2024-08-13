@@ -61,3 +61,7 @@ export async function refreshUsersSession(sessionId, refreshToken) {
     ...newSession,
   });
 }
+
+export function logoutUser(sessionId) {
+  return SessionsCollection.deleteOne({ _id: sessionId });
+}

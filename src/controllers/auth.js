@@ -38,7 +38,16 @@ export async function loginUserController(req, res, next) {
   });
 }
 
-export async function logoutUserController(req, res, next) {}
+export async function logoutUserController(req, res, next) {
+  if (typeof req.cookies.sessionId === 'string') {
+    await AuthService.logoutUser(req.cookies.sessionId);
+  }
+
+  res.clearCookie('refreshToken');
+  res.clearCookie('sessionId');
+
+  res.status(204).end();
+}
 
 export async function refreshUserSessionController(req, res, next) {
   const session = await AuthService.refreshUsersSession(
