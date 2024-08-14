@@ -8,8 +8,8 @@ export async function registerUserController(req, res, next) {
   };
 
   const registeredUser = await AuthService.registerUser(user);
-  res.status(200).send({
-    status: 200,
+  res.status(201).send({
+    status: 201,
     message: 'Successfully registered a user!',
     data: registeredUser,
   });
