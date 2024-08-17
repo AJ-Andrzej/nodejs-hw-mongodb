@@ -90,7 +90,7 @@ export async function requestResetToken(email) {
       expiresIn: '5m',
     },
   );
-  console.log(resetToken);
+
   const resetPasswordTemplatePath = path.join(
     TEMPLATES_DIR,
     'reset-password-email.html',
@@ -144,5 +144,6 @@ export async function resetPassword(password, token) {
 
   const newPassword = await bcrypt.hash(password, 10);
 
+  await SessionsCollection.findOneAndDelete({ userId: user._id });
   await UsersCollection.findByIdAndUpdate(user._id, { password: newPassword });
 }
