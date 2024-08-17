@@ -90,7 +90,7 @@ export async function requestResetToken(email) {
       expiresIn: '5m',
     },
   );
-
+  console.log(resetToken);
   const resetPasswordTemplatePath = path.join(
     TEMPLATES_DIR,
     'reset-password-email.html',
@@ -128,7 +128,8 @@ export async function resetPassword(password, token) {
   try {
     decoded = jwt.verify(token, env('JWT_SECRET'));
   } catch (err) {
-    if (err instanceof Error) throw createHttpError(401, err.message);
+    if (err instanceof Error)
+      throw createHttpError(401, 'Token is expired or invalid');
     throw err;
   }
 
