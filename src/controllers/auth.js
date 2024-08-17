@@ -73,3 +73,12 @@ export async function refreshUserSessionController(req, res, next) {
     },
   });
 }
+
+export async function resetPasswordController(req, res, next) {
+  await AuthService.requestResetToken(req.body.email);
+  res.send({
+    status: 200,
+    message: 'Reset password email was successfully sent!',
+    data: {},
+  });
+}
