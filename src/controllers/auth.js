@@ -74,11 +74,21 @@ export async function refreshUserSessionController(req, res, next) {
   });
 }
 
-export async function resetPasswordController(req, res, next) {
+export async function requestResetEmailController(req, res, next) {
   await AuthService.requestResetToken(req.body.email);
   res.send({
     status: 200,
     message: 'Reset password email was successfully sent!',
+    data: {},
+  });
+}
+
+export async function resetPasswordController(req, res, next) {
+  const { password, token } = req.body;
+  await AuthService.resetPassword(password, token);
+  res.send({
+    message: 'Password was successfully reset!',
+    status: 200,
     data: {},
   });
 }

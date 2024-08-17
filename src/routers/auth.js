@@ -4,6 +4,7 @@ import {
   loginUserController,
   logoutUserController,
   refreshUserSessionController,
+  requestResetEmailController,
   resetPasswordController,
 } from '../controllers/auth.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
@@ -40,6 +41,13 @@ router.post(
   '/auth/send-reset-email',
   jsonParser,
   validateBody(requestResetEmailSchema),
+  ctrlWrapper(requestResetEmailController),
+);
+
+router.post(
+  '/auth/reset-pwd',
+  jsonParser,
+  validateBody(resetPasswordSchema),
   ctrlWrapper(resetPasswordController),
 );
 export default router;

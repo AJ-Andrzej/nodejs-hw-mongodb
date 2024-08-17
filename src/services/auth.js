@@ -90,7 +90,6 @@ export async function requestResetToken(email) {
       expiresIn: '5m',
     },
   );
-  console.log(resetToken);
 
   const resetPasswordTemplatePath = path.join(
     TEMPLATES_DIR,
@@ -106,10 +105,43 @@ export async function requestResetToken(email) {
     link: `${env('APP_DOMAIN')}/reset-password?token=${resetToken}`,
   });
 
-  await sendMail({
-    from: SMTP.FROM,
-    to: email,
-    subject: 'Reset your password',
-    html,
+  try {
+    await sendMail({
+      from: SMTP.FROM,
+      to: email,
+      subject: 'Reset your password',
+      html,
+    });
+  } catch (err) {
+    if (err instanceof Error)
+      throw createHttpError(
+        500,
+        'Failed to send the email, please try again later.',
+      );
+    throw err;
+  }
+}
+
+export async function resetPassword(password, token) {
+  let decoded;
+
+  try {
+    decoded = jwt.verify(token, env('JWT_SECRET'));
+  } catch (err) {
+    if (err instanceof Error) throw createHttpError(401, err.message);
+    throw err;
+  }
+
+  const user = await UsersCollection.findOne({
+    _id: decoded.sub,
+    email: decoded.email,
   });
+
+  if (user === null) {
+    throw createHttpError(401, 'User not found');
+  }
+
+  const newPassword = await bcrypt.hash(password, 10);
+
+  await UsersCollection.findByIdAndUpdate(user._id, { password: newPassword });
 }
