@@ -1,0 +1,26 @@
+type: object
+required:
+  - _id
+  - name
+  - email
+properties:
+  _id:
+    description: "User's id"
+    type: string
+    example: 669cfe709d1dfd489865c9d6
+  name:
+    description: "User's name"
+    type: string
+    example: 'Trevor Philips'
+  email:
+    description: "Contact's email"
+    type: string
+    example: 'trevor@gmail.com'
+  createdAt:
+    description: 'Time when the contact was created'
+    type: string
+    example: '2024-08-13T13:40:55.208Z'
+  updatedAt:
+    description: 'Time when the contact was updated'
+    type: string
+    example: '2024-08-13T13:40:55.208Z'

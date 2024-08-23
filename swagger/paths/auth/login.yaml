@@ -1,0 +1,67 @@
+tags:
+  - Auth
+summary: Login a user
+operationId: login
+description: Authenticate a user with their email and password
+security: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          email:
+            description: "User's email"
+            type: string
+            example: 'trevor@gmail.com'
+          password:
+            description: "User's password"
+            type: string
+            example: 'yourpassword'
+responses:
+  '200':
+    description: 'Successfully logged in an user!'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully registered a user!
+            data:
+              type: object
+              required:
+                - accessToken
+              properties:
+                accessToken:
+                  type: string
+                  example: 'CwRcaT3UtF0FPT7n5Pj/dxaieNhibNZZQLuv6da1'
+  '400':
+    description: Bad request
+  '401':
+    description: User not found
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+          properties:
+            status:
+              type: integer
+              example: 401
+            message:
+              type: string
+              example: 'User not found'

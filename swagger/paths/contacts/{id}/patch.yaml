@@ -1,0 +1,86 @@
+tags:
+  - Contacts
+summary: Update contact by id
+operationId: updateContact
+description: 'Update contact by id'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '669cfe709d1dfd489865c9d6'
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          _id:
+            description: "Contact's id"
+            type: string
+            example: 669cfe709d1dfd489865c9d6
+          name:
+            description: "Contact's name"
+            type: string
+            example: 'Trevor Philips'
+          phoneNumber:
+            description: "Contact's phone number"
+            type: number
+            example: 333-33-33
+          email:
+            description: "Contact's email"
+            type: string
+            example: 'trevor@gmail.com'
+          isFavourite:
+            description: 'Is Contact marks as favorite'
+            type: boolean
+            example: true
+            default: false
+          photo:
+            description: "Link to student's photo"
+            type: string
+            format: binary
+          contactType:
+            description: "Contact's type"
+            type: string
+            enum: ['work', 'home', 'personal']
+            default: personal
+            example: home
+          userId:
+            description: "Contact's parent id"
+            type: string
+            example: 669cfe709d1dfd489865c9d6
+          createdAt:
+            description: 'Time when the contact was created'
+            type: string
+            example: '2024-08-13T13:40:55.208Z'
+          updatedAt:
+            description: 'Time when the contact was updated'
+            type: string
+            example: '2024-08-13T13:40:55.208Z'
+responses:
+  '201':
+    description: Successfully patched a contact!
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: 'Successfully patched a contact!'
+            data:
+              type: object
+              $ref: ..\..\..\components\schemas\contact.yaml
+  '401':
+    $ref: ..\..\..\components\responses\401.yaml

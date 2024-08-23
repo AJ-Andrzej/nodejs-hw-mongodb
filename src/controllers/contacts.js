@@ -79,10 +79,12 @@ export async function patchContactController(req, res, next) {
   const photo = req.file;
   let photoUrl;
 
-  if (env('ENABLE_CLOUDINARY') === 'true') {
-    photoUrl = await saveFileToCloudinary(photo);
-  } else {
-    photoUrl = await saveFileToUploadDir(photo);
+  if (photo) {
+    if (env('ENABLE_CLOUDINARY') === 'true') {
+      photoUrl = await saveFileToCloudinary(photo);
+    } else {
+      photoUrl = await saveFileToUploadDir(photo);
+    }
   }
 
   const updatedContact = await ContactsService.updateContact(

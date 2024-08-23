@@ -1,0 +1,11 @@
+tags:
+  - Auth
+summary: Logout user
+operationId: logout
+description: Logs out the user by invalidating their session.
+security: []
+responses:
+  '204':
+    description: The user was successfully logged out. No content is returned in the response.
+  '400':
+    description: Bad request

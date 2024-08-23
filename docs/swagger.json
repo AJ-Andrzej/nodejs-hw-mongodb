@@ -1,0 +1,211 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Contacts book app",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "description": "<Server for contacts book app>"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    },
+    {
+      "url": "https://dashboard.render.com/web/srv-cqegb5g8fa8c73e6heeg"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Contacts",
+      "description": "Operations about contacts."
+    },
+    {
+      "name": "Auth",
+      "description": "Auth operations."
+    }
+  ],
+  "paths": {
+    "/students/{id}": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Get contact by id",
+        "operationId": "getContact",
+        "description": "Get contact by id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "669cfe709d1dfd489865c9d6"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get contact by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully found student with id 669cfe709d1dfd489865c9d6!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/contact"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "contact": {
+        "type": "object",
+        "required": [
+          "_id",
+          "name",
+          "phoneNumber",
+          "email",
+          "isFavourite",
+          "contactType"
+        ],
+        "properties": {
+          "_id": {
+            "description": "Contact's id",
+            "type": "string",
+            "example": "669cfe709d1dfd489865c9d6"
+          },
+          "name": {
+            "description": "Contact's name",
+            "type": "string",
+            "example": "Trevor Philips"
+          },
+          "phoneNumber": {
+            "description": "Contact's phone number",
+            "type": "number",
+            "example": "333-33-33"
+          },
+          "email": {
+            "description": "Contact's email",
+            "type": "string",
+            "example": "trevor@gmail.com"
+          },
+          "isFavourite": {
+            "description": "Is Contact marks as favorite",
+            "type": "boolean",
+            "example": true,
+            "default": false
+          },
+          "photo": {
+            "description": "Link to student's photo",
+            "type": "string",
+            "example": "https://res.cloudinary.com/dnn3juszw/image/upload/v1723925640/nweeqslevwgywsqxsrm3.jpg"
+          },
+          "contactType": {
+            "description": "Contact's type",
+            "type": "string",
+            "enum": [
+              "work",
+              "home",
+              "personal"
+            ],
+            "default": "personal",
+            "example": "home"
+          },
+          "userId": {
+            "description": "Contact's parent id",
+            "type": "string",
+            "example": "669cfe709d1dfd489865c9d6"
+          },
+          "createdAt": {
+            "description": "Time when the contact was created",
+            "type": "string",
+            "example": "2024-08-13T13:40:55.208Z"
+          },
+          "updatedAt": {
+            "description": "Time when the contact was updated",
+            "type": "string",
+            "example": "2024-08-13T13:40:55.208Z"
+          }
+        }
+      }
+    },
+    "responses": {
+      "401": {
+        "description": "Unauthorized error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "UnauthorizedError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Access token expired"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
