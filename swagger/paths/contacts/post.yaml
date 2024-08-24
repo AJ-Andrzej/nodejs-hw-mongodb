@@ -14,7 +14,6 @@ requestBody:
           - name
           - phoneNumber
           - contactType
-          - userId
         properties:
           _id:
             description: "Contact's id"
@@ -47,18 +46,6 @@ requestBody:
             enum: ['work', 'home', 'personal']
             default: personal
             example: home
-          userId:
-            description: "Contact's parent id"
-            type: string
-            example: 669cfe709d1dfd489865c9d6
-          createdAt:
-            description: 'Time when the contact was created'
-            type: string
-            example: '2024-08-13T13:40:55.208Z'
-          updatedAt:
-            description: 'Time when the contact was updated'
-            type: string
-            example: '2024-08-13T13:40:55.208Z'
 responses:
   '201':
     description: Creates a contact

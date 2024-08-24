@@ -14,7 +14,7 @@
       "url": "http://localhost:3000"
     },
     {
-      "url": "https://dashboard.render.com/web/srv-cqegb5g8fa8c73e6heeg"
+      "url": "https://nodejs-hw-mongodb-z3pc.onrender.com"
     }
   ],
   "tags": [
@@ -199,8 +199,7 @@
                 "required": [
                   "name",
                   "phoneNumber",
-                  "contactType",
-                  "userId"
+                  "contactType"
                 ],
                 "properties": {
                   "_id": {
@@ -244,21 +243,6 @@
                     ],
                     "default": "personal",
                     "example": "home"
-                  },
-                  "userId": {
-                    "description": "Contact's parent id",
-                    "type": "string",
-                    "example": "669cfe709d1dfd489865c9d6"
-                  },
-                  "createdAt": {
-                    "description": "Time when the contact was created",
-                    "type": "string",
-                    "example": "2024-08-13T13:40:55.208Z"
-                  },
-                  "updatedAt": {
-                    "description": "Time when the contact was updated",
-                    "type": "string",
-                    "example": "2024-08-13T13:40:55.208Z"
                   }
                 }
               }
@@ -430,21 +414,6 @@
                     ],
                     "default": "personal",
                     "example": "home"
-                  },
-                  "userId": {
-                    "description": "Contact's parent id",
-                    "type": "string",
-                    "example": "669cfe709d1dfd489865c9d6"
-                  },
-                  "createdAt": {
-                    "description": "Time when the contact was created",
-                    "type": "string",
-                    "example": "2024-08-13T13:40:55.208Z"
-                  },
-                  "updatedAt": {
-                    "description": "Time when the contact was updated",
-                    "type": "string",
-                    "example": "2024-08-13T13:40:55.208Z"
                   }
                 }
               }

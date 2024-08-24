@@ -13,7 +13,7 @@ tags:
     description: Auth operations.
 servers:
   - url: http://localhost:3000
-  - url: https://dashboard.render.com/web/srv-cqegb5g8fa8c73e6heeg
+  - url: https://nodejs-hw-mongodb-z3pc.onrender.com
 paths:
   /contacts:
     get:
