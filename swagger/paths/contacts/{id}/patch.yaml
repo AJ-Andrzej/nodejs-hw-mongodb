@@ -18,10 +18,6 @@ requestBody:
       schema:
         type: object
         properties:
-          _id:
-            description: "Contact's id"
-            type: string
-            example: 669cfe709d1dfd489865c9d6
           name:
             description: "Contact's name"
             type: string
